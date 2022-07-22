@@ -108,7 +108,8 @@ module.exports = {
 }
 
 ```
-- Slash Commands
+- Slash Commands <br>
+`guild` and `global` options on `commandType` will decide what this command will be used. If you put `guild` it means it only applied to guild thats given on the config.js and if it `global` it will be defaulted assigned to global and guild.
 ```javascript
 const { 
   ActionRowBuilder, 
@@ -176,6 +177,7 @@ module.exports = {
   }
 };
 ```
+
 ## License
 
 [Apache 2.0](https://choosealicense.com/licenses/apache-2.0/)
