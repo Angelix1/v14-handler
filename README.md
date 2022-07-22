@@ -4,6 +4,19 @@
 This Handler Support both Slash and Legacy. Most the main brain of this handler located in Utils Folder.
 
 
+## Handler Features
+
+- Reload-able Slash Command and Events
+- Support Custom Sub-Event for Each Events it givens.
+- Slash commands Support.
+- Legacy commands support
+- Provided Full Reference and Vast options on both commands. Example available on [Examples](https://github.com/Angelix1/v14-handler/tree/main/src/examples/)
+- Support sub directory in legacy and slash.
+
+## Feedback
+
+If you have any feedback, please reach out to me at [Discord](https://discord.com/users/692632336961110087)
+
 
 ## **Installation | How to use it**
 
@@ -13,12 +26,14 @@ This Handler Support both Slash and Legacy. Most the main brain of this handler 
 
 **3.** Fill in everything in **`src/config/config.js`**, some value are optional.
 
-**4.** After filling everything in config. Type in **`npm install`** shell.
+**3.5)** If you using Replit.com, you need to change the `entrypoint` on `replit.nix` from `entrypoint = 'index.js'` to `entrypoint = 'src/index.js'`.
+
+**4.** After filling everything in config. Type in **`npm install`** shell. *On Replit you just click Green RUN button on top*
 
 **5.** start the bot with **`node src/index.js`** or **`node index.js`**, depends how your terminal works.
 <br/>
 
-### _Modify - config.js_
+### _Modifiying config.js_
 
 ```javascript
 {
@@ -50,118 +65,119 @@ This Handler Support both Slash and Legacy. Most the main brain of this handler 
 9. `listOfAppIds` meh you can leave this empty, this is dictionary for my original bot.
 10. `clients` this is required if you use `slash`, if `testing`is `true` then the process will use `testBot` and if it's `false` the process will use `mainBot`, what should you put on these?, your bot's `ID` or TestBot's `ID`.
 
-
-
-## Handler Features
-
-- Reload-able Slash Command and Events
-- Support Custom Sub-Event for Each Events it givens.
-- Slash commands Support.
-- Legacy commands support
-- Provided Full Reference and Vast options on both commands. Example available on [Examples](https://github.com/Angelix1/v14-handler/src/examples/)
-- Support sub directory in legacy and slash.
-
-## Feedback
-
-If you have any feedback, please reach out to me at [Discord](https://discord.com/users/692632336961110087)
-
 ## Usage/Examples
 
-- Commands Example
+- Legacy Example
 ```javascript
-// chat input slash commands
-const { CommandInteraction, ApplicationCommandType } = require("discord.js");
-const BOT = require("../../../handlers/Client");
+const { 
+  ActionRowBuilder, 
+  SelectMenuBuilder, 
+  ButtonBuilder, 
+  EmbedBuilder,
+  ButtonStyle
+} = require('discord.js');
 
-module.exports = {
-  name: "",
-  description: ``,
-  userPermissions: [],
-  botPermissions: [],
-  category: "",
-  cooldown: 10,
-  type: ApplicationCommandType.ChatInput,
-  /**
-   *
-   * @param {BOT} client
-   * @param {CommandInteraction} interaction
-   * @param {String[]} args
-   */
-  run: async (client, interaction, args) => {
-    // Code
-  },
-};
+const { stripIndents, oneLine } = require('common-tags');
 
-// message input slash commands
-const {
-  ContextMenuCommandInteraction,
-  ApplicationCommandType,
-} = require("discord.js");
-const BOT = require("../../../handlers/Client");
+module.exports = {    
+  name: "ping", 
+  description: "Show Bot's latency",
+  aliases: ['pong', 'latency'],
+  category: 'util',
+  devsOnly: false,
+  userPermissions: [ 'CreateInstantInvite', 'EmbedLinks' ], 
+  clientPermissions: [ 'Administrator' ], 
+  details: ["This will give bot's heartbeat to discord API"],
+  cooldown: 5, // seconds
+  usage: ['<Require argument> [optional arguments]'], // if argsRequired is true then this param required
+  argsRequired: true,
+  wip: false,
 
-module.exports = {
-  name: "",
-  category: "",
-  type: ApplicationCommandType.Message,
-  /**
-   *
-   * @param {BOT} client
-   * @param {ContextMenuCommandInteraction} interaction
-   */
-  run: async (client, interaction) => {
-    // Code
-  },
-};
-
-// user slash commands
-
-const {
-  ContextMenuCommandInteraction,
-  ApplicationCommandType,
-} = require("discord.js");
-const BOT = require("../../../handlers/Client");
-
-module.exports = {
-  name: "",
-  category: "",
-  type: ApplicationCommandType.User,
-  /**
-   *
-   * @param {BOT} client
-   * @param {ContextMenuCommandInteraction} interaction
-   */
-  run: async (client, interaction) => {
-    // Code
-  },
-};
-
-// message commands
-const { Message } = require("discord.js");
-const BOT = require("../../../handlers/Client");
-
-module.exports = {
-  name: "",
-  description: ``,
-  userPermissions: [],
-  botPermissions: [],
-  category: "",
-  cooldown: 10,
-  /**
-   *
-   * @param {BOT} client
-   * @param {Message} message
-   * @param {String[]} args
-   * @param {String} prefix
-   */
-  run: async (client, message, args, prefix) => {
-    // Code
-  },
-};
+  async run (client, message, args) {
+    try
+    {
+      message.channel.send({ content: `hi ${message.author}, my latency is ${client.ws.ping}` })
+//=================
+    }
+    catch(e)
+    {
+      console.log(e)
+    }      
+//=================
+  }
+}
 
 ```
+- Slash Commands
+```javascript
+const { 
+  ActionRowBuilder, 
+  SelectMenuBuilder, 
+  ButtonBuilder, 
+  EmbedBuilder,
+  ButtonStyle,
+  ApplicationCommandType, 
+  ApplicationCommandOptionType, 
+  ModalBuilder, 
+  TextInputBuilder
+} = require('discord.js');
 
+const { stripIndents, oneLine } = require('common-tags');
+
+
+module.exports = {
+  data: {
+    name: 'ping',
+    description: 'Bot latency',
+    type: ApplicationCommandType.ChatInput,
+/* long Reference here, you can see it on the example slash.js yourself */
+
+    options: [{
+    	name: 'pong'
+	description: 'pong?'
+	type: 3 // String
+	}]
+  },
+  commandType: 'global', // global | guild
+  dev: false,
+  async run(client, int) {
+    try {
+      await int.reply({ content: `pong! ${client.ws.ping}ms!` })
+    }
+    catch(e) {
+      console.log(e)
+    }
+    
+  }
+}
+```
+- Custom Event (events) <br>
+**The Listener Must be a valid event Name and you can enable which event you want to listen on [LoadEvents possibleEvents by uncommenting them](https://github.com/Angelix1/v14-handler/tree/main/src/utils)** <br>
+*the `name` of the event must match to the filename, so it can be reloaded if you made changes to the file.
+- src/events/messages/autoresponse.js
+```javascript
+module.exports = {
+  name: 'autoresponse',
+  listener: 'messageCreate',
+  async run(client, message) {
+    if(message.content == 'hi') { 
+    	message.reply('hello') 
+    }
+  }
+};
+```
+- src/events/messages/updatedmessagelog.js
+```javascript
+module.exports = {
+  name: 'updatedmessagelog',
+  listener: 'messageUpdate',
+  async run(client, oldMessage, newMessage) {
+  	console.log(oldMessage, newMessage)
+  }
+};
+```
 ## License
 
-[MIT](https://choosealicense.com/licenses/mit/)
+[Apache 2.0](https://choosealicense.com/licenses/apache-2.0/)
 
-# Thanks For Using Mine Handler Please Give a Star
+If you Like the Handler, please Star it, Thank you :3
