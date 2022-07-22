@@ -17,6 +17,15 @@ This Handler Support both Slash and Legacy. Most the main brain of this handler 
 
 If you have any feedback, please reach out to me at [Discord](https://discord.com/users/692632336961110087)
 
+# miscellaneous functions
+This can be called globally by using `functions`. <br>
+There's 3 functions *([refer to this](https://github.com/Angelix1/v14-handler/tree/main/src/utils/functions))* <br>
+1. `colorEmbed`, this will bring back most common used colors on V12 Embed, such as red, green, yellow, random. <br>
+You can use these properties when calling this functions <br>
+- `Green`, `Red`, `Blue`, `Yellow`, `Random`. Example: `functions.colorEmbed.Red`. <br>
+2. `rgb`, this function will generate random RGB value for example `[ 123, 255, 3 ]`, and this also can be use to convert `hex` codes to RGB values for V14 `.setColor`. Example: `functions.rgb('#DAFOFO')`.
+3. `sleep`, this function actually self-explanatory, its like `delay` package, how to use this function you'll need to await it. Example: `await functions.sleep(5000)`, means sleep for 5 seconds.
+
 
 ## **Installation | How to use it**
 
