@@ -21,9 +21,9 @@ module.exports = {
 
         
     const __ = require('path');
+    let missing = __.resolve(`src/config/config.js`);
     
     if(!slashFolder && !slashFolder.length) {
-      let missing = __.resolve(`src/config/config.js`);
       return process.emitWarning(`slashFolder is Empty String!`, {
         code: 'Custom_Warning',
         detail: `Add folder name if you wanted slash command.\n(${missing})`
