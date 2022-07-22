@@ -133,8 +133,8 @@ module.exports = {
 /* long Reference here, you can see it on the example slash.js yourself */
 
     options: [{
-    	name: 'pong'
-	description: 'pong?'
+    	name: 'pong',
+	description: 'pong?',
 	type: 3 // String
 	}]
   },
