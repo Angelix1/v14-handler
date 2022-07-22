@@ -17,7 +17,7 @@ This Handler Support both Slash and Legacy. Most the main brain of this handler 
 
 If you have any feedback, please reach out to me at [Discord](https://discord.com/users/692632336961110087)
 
-# miscellaneous functions
+# Miscellaneous functions
 This can be called globally by using `functions`. <br>
 There's 3 functions *([refer to this](https://github.com/Angelix1/v14-handler/tree/main/src/utils/functions))* <br>
 1. `colorEmbed`, this will bring back most common used colors on V12 Embed, such as red, green, yellow, random. <br>
