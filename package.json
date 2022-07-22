@@ -1,0 +1,30 @@
+{
+  "name": "angelhandler",
+  "version": "1.0.0",
+  "description": "Discord Bot handler",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Angelix1/v14-handler.git"
+  },
+  "author": "angelix1",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/Angelix1/v14-handler/issues"
+  },
+  "homepage": "https://github.com/Angelix1/v14-handler#readme",
+  "dependencies": {
+    "@discordjs/rest": "^1.0.0",
+    "axios": "^0.27.2",
+    "common-tags": "^1.8.2",
+    "discord-api-types": "^0.36.2",
+    "discord.js": "^14.0.2",
+    "esprima": "^4.0.1"
+  },
+  "devDependencies": {
+    "eslint": "^8.20.0"
+  }
+}
